@@ -65,7 +65,7 @@ def main():
     tf.random.set_seed(SEED)
     assert START_TOKEN == 0
 
-    vocab_size = 5000
+    vocab_size = 21100
 
     physical_devices = tf.config.experimental.list_physical_devices("GPU")
     if len(physical_devices) > 0:
