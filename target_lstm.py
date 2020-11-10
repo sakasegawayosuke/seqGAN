@@ -13,11 +13,13 @@ class TARGET_LSTM(RNNLM):
         num_emb = voc_size
         emb_dim = params[0].shape[1]
         hidden_dim = params[1].shape[1]
+        
+        param_0 = np.zeros((num_emb, emb_dim)) # 作成
 
         super(TARGET_LSTM, self).__init__(num_emb, batch_size, emb_dim, hidden_dim, sequence_length, start_token)
         weights = [
             # Embedding
-            params[0],
+            param_0,
             # LSTM
             np.c_[params[1], params[4], params[10], params[7]], # kernel (i, f, c, o)
             np.c_[params[2], params[5], params[11], params[8]], # recurrent_kernel
