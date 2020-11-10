@@ -27,7 +27,7 @@ class TARGET_LSTM(RNNLM):
             np.c_[params[2], params[5], params[11], params[8]], # recurrent_kernel
             np.r_[params[3], params[6], params[12], params[9]], # bias
             # Dense
-            params_13,
-            params_14
+            param_13,
+            param_14
         ]
         self.g_model.set_weights(weights)
