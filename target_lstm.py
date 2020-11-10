@@ -15,6 +15,8 @@ class TARGET_LSTM(RNNLM):
         hidden_dim = params[1].shape[1]
         
         param_0 = np.zeros((num_emb, emb_dim)) # 作成
+        param_13 = np.zeros((emb_dim, num_emb)) # 作成
+        param_14 = np.zeros(num_emb) # 作成
 
         super(TARGET_LSTM, self).__init__(num_emb, batch_size, emb_dim, hidden_dim, sequence_length, start_token)
         weights = [
@@ -25,7 +27,7 @@ class TARGET_LSTM(RNNLM):
             np.c_[params[2], params[5], params[11], params[8]], # recurrent_kernel
             np.r_[params[3], params[6], params[12], params[9]], # bias
             # Dense
-            params[13],
-            params[14]
+            params_13,
+            params_14
         ]
         self.g_model.set_weights(weights)
