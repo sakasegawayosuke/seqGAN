@@ -4,10 +4,13 @@ from rnnlm import RNNLM
 class TARGET_LSTM(RNNLM):
     # function for reading save/target_params.pkl
     # save/target_params.pklを読み込むための機能
-    def __init__(self, batch_size, sequence_length, start_token, params):
+    
+    # voc_sizeを追加 num_embの値をvoc_sizeに変更
+    def __init__(self, batch_size, sequence_length, start_token, params, voc_size):
         # Model sizes are determined by the parameter file
         # モデルの大きさはパラメータファイルで決められる
-        num_emb = params[0].shape[0]
+#         num_emb = params[0].shape[0]
+        num_emb = voc_size
         emb_dim = params[0].shape[1]
         hidden_dim = params[1].shape[1]
 
