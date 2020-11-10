@@ -76,7 +76,7 @@ def main():
     generator = Generator(vocab_size, BATCH_SIZE, EMB_DIM, HIDDEN_DIM, SEQ_LENGTH, START_TOKEN)
     # 最初のパラメータをpicklファイルから参照
     target_params = pickle.load(open('save/target_params_py3.pkl', 'rb'))
-    target_lstm = TARGET_LSTM(BATCH_SIZE, SEQ_LENGTH, START_TOKEN, target_params) # The oracle model
+    target_lstm = TARGET_LSTM(BATCH_SIZE, SEQ_LENGTH, START_TOKEN, target_params, vocab_size) # The oracle model
 
     # 識別器の初期設定
     discriminator = Discriminator(sequence_length=SEQ_LENGTH, num_classes=2, vocab_size=vocab_size, embedding_size=dis_embedding_dim,
