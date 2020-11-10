@@ -17,7 +17,7 @@ import pickle
 #########################################################################################
 #  生成器のパラメータ
 ######################################################################################
-EMB_DIM = 32 # embedding dimension
+EMB_DIM = 32*2 # embedding dimension
 HIDDEN_DIM = 32 # hidden state dimension of lstm cell
 SEQ_LENGTH = 20 # sequence length
 START_TOKEN = 0
