@@ -47,7 +47,7 @@ TOTAL_BATCH = 200 # 生成器と識別器の訓練を何セット行うか
 # 博多駅のレビューから作った俳句のid列
 positive_file = 'save/hakataeki_haiku2id.txt'
 # 実際の俳句のid列
-dis_positive_file = 'save/haiku2id_re.txt'
+dis_positive_file = 'save/haiku2id.txt'
 # generatorが作った偽物の俳句
 negative_file = 'save/generator_sample.txt'
 # このファイルはどうした？
