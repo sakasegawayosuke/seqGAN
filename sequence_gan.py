@@ -45,7 +45,7 @@ TOTAL_BATCH = 200 # 生成器と識別器の訓練を何セット行うか
 # 学習で使用するデータ
 
 # 博多駅のレビューから作った俳句のid列
-positive_file = 'save/mix.txt'
+positive_file = 'save/hakataeki_haiku2id.txt'
 # 実際の俳句のid列
 dis_positive_file = 'save/haiku2id_re.txt'
 # generatorが作った偽物の俳句
@@ -65,7 +65,7 @@ def main():
     tf.random.set_seed(SEED)
     assert START_TOKEN == 0
 
-    vocab_size = 21100
+    vocab_size = 21600
 
     physical_devices = tf.config.experimental.list_physical_devices("GPU")
     if len(physical_devices) > 0:
