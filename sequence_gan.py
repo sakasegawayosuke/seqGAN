@@ -105,7 +105,7 @@ def main():
         print('Start pre-training discriminator...')
         # Train 3 epoch on the generated data and do this for 50 times
         # 3エポックの識別器の訓練を５０回繰り返す
-        for _ in range(20):
+        for _ in range(10):
             print("Dataset", _)
 
             # まず生成器が偽物を作成
