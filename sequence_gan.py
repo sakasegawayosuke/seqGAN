@@ -40,7 +40,7 @@ dis_batch_size = 64
 # GANの学習を実行していく
 #########################################################################################
 
-TOTAL_BATCH = 2 # 生成器と識別器の訓練を何セット行うか
+TOTAL_BATCH = 200 # 生成器と識別器の訓練を何セット行うか
 
 # 学習で使用するデータ
 
@@ -105,7 +105,7 @@ def main():
         print('Start pre-training discriminator...')
         # Train 3 epoch on the generated data and do this for 50 times
         # 3エポックの識別器の訓練を５０回繰り返す
-        for _ in range(8):
+        for _ in range(10):
             print("Dataset", _)
 
             # まず生成器が偽物を作成
