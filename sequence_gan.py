@@ -21,7 +21,7 @@ EMB_DIM = 32 # embedding dimension
 HIDDEN_DIM = 32 # hidden state dimension of lstm cell
 SEQ_LENGTH = 20 # sequence length
 START_TOKEN = 0
-PRE_EPOCH_NUM = 50 # supervise (maximum likelihood estimation) epochs
+PRE_EPOCH_NUM = 120 # supervise (maximum likelihood estimation) epochs
 SEED = 88
 BATCH_SIZE = 64
 
@@ -150,10 +150,10 @@ def main():
 
         # Train the discriminator
         print("Discriminator", total_batch)
-        for _ in range(5):
+        for _ in range(1):
             generator.generate_samples(generated_num // BATCH_SIZE, negative_file)
             dis_dataset = dataset_for_discriminator(positive_file, negative_file, BATCH_SIZE)
-            discriminator.train(dis_dataset, 3, (generated_num // BATCH_SIZE) * 2)
+            discriminator.train(dis_dataset, 1, (generated_num // BATCH_SIZE) * 2)
     generator.save("generator.h5")
     discriminator.save("discriminator.h5")
     
