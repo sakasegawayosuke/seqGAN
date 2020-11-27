@@ -156,7 +156,7 @@ def main():
             discriminator.train(dis_dataset, 1, (generated_num // BATCH_SIZE) * 2)
             
         if total_batch % 100 == 0:
-            generator.generate_samples(generated_num // BATCH_SIZE, output_file_{0}.format(total_batch))
+            generator.generate_samples(generated_num // BATCH_SIZE, output_file_{}.format(total_batch))
             
     generator.save("generator.h5")
     discriminator.save("discriminator.h5")
