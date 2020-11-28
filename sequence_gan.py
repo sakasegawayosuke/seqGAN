@@ -105,7 +105,7 @@ def main():
         print('Start pre-training discriminator...')
         # Train 3 epoch on the generated data and do this for 50 times
         # 3エポックの識別器の訓練を５０回繰り返す
-        for _ in range(10):
+        for _ in range(50):
             print("Dataset", _)
 
             # まず生成器が偽物を作成
@@ -131,7 +131,7 @@ def main():
     for total_batch in range(TOTAL_BATCH):
         print("Generator", total_batch)
         # Train the generator for one step
-        for it in range(15):
+        for it in range(1):
             samples = generator.generate_one_batch()
             rewards = rollout.get_reward(samples, 16, discriminator)
             generator.train_step(samples, rewards)
@@ -150,10 +150,10 @@ def main():
 
         # Train the discriminator
         print("Discriminator", total_batch)
-        for _ in range(1):
+        for _ in range(5):
             generator.generate_samples(generated_num // BATCH_SIZE, negative_file)
             dis_dataset = dataset_for_discriminator(positive_file, negative_file, BATCH_SIZE)
-            discriminator.train(dis_dataset, 1, (generated_num // BATCH_SIZE) * 2)
+            discriminator.train(dis_dataset, 3, (generated_num // BATCH_SIZE) * 2)
     generator.save("generator.h5")
     discriminator.save("discriminator.h5")
     
