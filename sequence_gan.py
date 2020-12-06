@@ -21,7 +21,7 @@ EMB_DIM = 32 # embedding dimension
 HIDDEN_DIM = 32 # hidden state dimension of lstm cell
 SEQ_LENGTH = 20 # sequence length
 START_TOKEN = 0
-PRE_EPOCH_NUM = 10 # supervise (maximum likelihood estimation) epochs
+PRE_EPOCH_NUM = 180 # supervise (maximum likelihood estimation) epochs
 SEED = 88
 BATCH_SIZE = 64
 
@@ -45,7 +45,7 @@ TOTAL_BATCH = 200 # 生成器と識別器の訓練を何セット行うか
 # 学習で使用するデータ
 
 # 博多駅のレビューから作った俳句のid列
-positive_file = 'save/mix.txt'
+positive_file = 'save/hakataeki_haiku2id_2.txt'
 # 実際の俳句のid列
 # dis_positive_file = 'save/haiku2id_re.txt'
 # generatorが作った偽物の俳句
@@ -105,7 +105,7 @@ def main():
         print('Start pre-training discriminator...')
         # Train 3 epoch on the generated data and do this for 50 times
         # 3エポックの識別器の訓練を５０回繰り返す
-        for _ in range(50):
+        for _ in range(5):
             print("Dataset", _)
 
             # まず生成器が偽物を作成
@@ -131,7 +131,7 @@ def main():
     for total_batch in range(TOTAL_BATCH):
         print("Generator", total_batch)
         # Train the generator for one step
-        for it in range(1):
+        for it in range(5):
             samples = generator.generate_one_batch()
             rewards = rollout.get_reward(samples, 16, discriminator)
             generator.train_step(samples, rewards)
@@ -150,10 +150,10 @@ def main():
 
         # Train the discriminator
         print("Discriminator", total_batch)
-        for _ in range(5):
+        for _ in range(1):
             generator.generate_samples(generated_num // BATCH_SIZE, negative_file)
             dis_dataset = dataset_for_discriminator(positive_file, negative_file, BATCH_SIZE)
-            discriminator.train(dis_dataset, 3, (generated_num // BATCH_SIZE) * 2)
+            discriminator.train(dis_dataset, 1, (generated_num // BATCH_SIZE) * 2)
             
         if total_batch % 100 == 0:
             generator.generate_samples(generated_num // BATCH_SIZE, 'save/output_file_{}.txt'.format(total_batch))
