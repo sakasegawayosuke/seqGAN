@@ -133,7 +133,7 @@ def main():
         # Train the generator for one step
         for it in range(15):
             samples = generator.generate_one_batch()
-            rewards = rollout.get_reward(samples, SEQ_LENGTH - 1, discriminator)
+            rewards = rollout.get_reward(samples, 16, discriminator)
             generator.train_step(samples, rewards)
 
         # Test
