@@ -57,7 +57,7 @@ eval_file = 'save/eval_file.txt'
 output_file = 'save/output_file.txt'
 
 # 生成された数
-generated_num = 10000
+generated_num = 4079
 
 def main():
     random.seed(SEED)
@@ -65,7 +65,7 @@ def main():
     tf.random.set_seed(SEED)
     assert START_TOKEN == 0
 
-    vocab_size = 1198
+    vocab_size = 3719
 
     physical_devices = tf.config.experimental.list_physical_devices("GPU")
     if len(physical_devices) > 0:
@@ -131,7 +131,7 @@ def main():
     for total_batch in range(TOTAL_BATCH):
         print("Generator", total_batch)
         # Train the generator for one step
-        for it in range(15):
+        for it in range(5):
             samples = generator.generate_one_batch()
             rewards = rollout.get_reward(samples, 16, discriminator)
             generator.train_step(samples, rewards)
