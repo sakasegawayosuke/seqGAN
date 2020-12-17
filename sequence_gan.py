@@ -47,7 +47,7 @@ TOTAL_BATCH = 200 # 生成器と識別器の訓練を何セット行うか
 # 博多駅のレビューから作った俳句のid列
 positive_file = 'save/kankouti_haiku2id.txt'
 # 実際の俳句のid列
-# dis_positive_file = 'save/haiku2id_re.txt'
+dis_positive_file = 'save/hakataeki_haiku2id_re.txt'
 # generatorが作った偽物の俳句
 negative_file = 'save/generator_sample.txt'
 # このファイルはどうした？
@@ -112,7 +112,7 @@ def main():
             generator.generate_samples(generated_num // BATCH_SIZE, negative_file)
 
             # 偽物と本物を混ぜたデータセットを作成
-            dis_dataset = dataset_for_discriminator(positive_file, negative_file, BATCH_SIZE)
+            dis_dataset = dataset_for_discriminator(dis_positive_file, negative_file, BATCH_SIZE)
 
             # 識別器を学習させる
             discriminator.train(dis_dataset, 3, (generated_num // BATCH_SIZE) * 2)
@@ -152,7 +152,7 @@ def main():
         print("Discriminator", total_batch)
         for _ in range(1):
             generator.generate_samples(generated_num // BATCH_SIZE, negative_file)
-            dis_dataset = dataset_for_discriminator(positive_file, negative_file, BATCH_SIZE)
+            dis_dataset = dataset_for_discriminator(dis_positive_file, negative_file, BATCH_SIZE)
             discriminator.train(dis_dataset, 1, (generated_num // BATCH_SIZE) * 2)
             
 #         if total_batch % 100 == 0:
