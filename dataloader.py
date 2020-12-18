@@ -11,7 +11,7 @@ def dataset_for_generator(data_file, batch_size):
             if len(parse_line) == 20:
                 token_stream.append(parse_line)
     
-    return tf.data.Dataset.from_tensor_slices(token_stream).shuffle(len(token_stream)).batch(batch_size).repeat()
+    return tf.data.Dataset.from_tensor_slices(token_stream).shuffle(len(token_stream)).batch(batch_size).repeat(5)
 
 def dataset_for_discriminator(positive_file, negative_file, batch_size):
     examples = []
