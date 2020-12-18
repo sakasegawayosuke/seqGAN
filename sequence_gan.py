@@ -92,16 +92,16 @@ def main():
 
 
     #  事前学習での文章生成をlstmで行い、生成器の重みを保存する
-    if not os.path.exists("generator_pretrained.h5"):
+    if not os.path.exists("save/generator_pretrained.h5"):
         print('Start pre-training...')
         log.write('pre-training...\n')
         generator.pretrain(gen_dataset, target_lstm, PRE_EPOCH_NUM, generated_num // BATCH_SIZE, eval_file)
         generator.save("generator_pretrained.h5")
     else:
-        generator.load("generator_pretrained.h5")
+        generator.load("save/generator_pretrained.h5")
 
     # 識別器の事前学習での重み
-    if not os.path.exists("discriminator_pretrained.h5"):
+    if not os.path.exists("save/discriminator_pretrained.h5"):
         print('Start pre-training discriminator...')
         # Train 3 epoch on the generated data and do this for 50 times
         # 3エポックの識別器の訓練を５０回繰り返す
@@ -118,7 +118,7 @@ def main():
             discriminator.train(dis_dataset, 3, (generated_num // BATCH_SIZE) * 2)
         discriminator.save("discriminator_pretrained.h5")
     else:
-        discriminator.load("discriminator_pretrained.h5")
+        discriminator.load("save/discriminator_pretrained.h5")
 
     rollout = ROLLOUT(generator, 0.8)
 
