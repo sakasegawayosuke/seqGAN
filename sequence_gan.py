@@ -56,8 +56,8 @@ eval_file = 'save/eval_file.txt'
 # 最後にgeneratorに生成させたもの
 output_file = 'save/output_file.txt'
 
-# 生成された数
-generated_num = 4079
+# 生成された数(識別器の学習データ数と揃える）
+generated_num = 7080
 
 def main():
     random.seed(SEED)
