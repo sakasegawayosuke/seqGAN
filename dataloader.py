@@ -33,4 +33,4 @@ def dataset_for_discriminator(positive_file, negative_file, batch_size):
             if len(parse_line) == 20:
                 examples.append(parse_line)
                 labels.append([1, 0])
-    return tf.data.Dataset.from_tensor_slices((examples, labels)).shuffle(len(examples)).batch(batch_size).repeat(6)
+    return tf.data.Dataset.from_tensor_slices((examples, labels)).shuffle(len(examples)).batch(batch_size).repeat(10)
