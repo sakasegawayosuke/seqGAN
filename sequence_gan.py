@@ -57,7 +57,7 @@ eval_file = 'save/eval_file.txt'
 output_file = 'save/output_file.txt'
 
 # 生成された数
-generated_num = 10000
+generated_num = 7000
 
 def main():
     random.seed(SEED)
