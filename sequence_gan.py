@@ -14,6 +14,9 @@ from rollout import ROLLOUT
 from target_lstm import TARGET_LSTM
 import pickle
 
+import matplotlib.pyplot as plt # 損失関数のグラフの可視化
+
+
 #########################################################################################
 #  生成器のパラメータ
 ######################################################################################
@@ -162,6 +165,26 @@ def main():
     discriminator.save("discriminator.h5")
     
     generator.generate_samples(generated_num // BATCH_SIZE, output_file)
+    
+    # 損失関数のグラフの可視化
+    history = discriminator.train(dis_dataset, 1, (generated_num // BATCH_SIZE) * 2)
+    # Plot training & validation accuracy values
+    plt.plot(history.history['acc'])
+    plt.plot(history.history['val_acc'])
+    plt.title('Model accuracy')
+    plt.ylabel('Accuracy')
+    plt.xlabel('Epoch')
+    plt.legend(['Train', 'Test'], loc='upper left')
+    plt.show()
+
+    # Plot training & validation loss values
+    plt.plot(history.history['loss'])
+    plt.plot(history.history['val_loss'])
+    plt.title('Model loss')
+    plt.ylabel('Loss')
+    plt.xlabel('Epoch')
+    plt.legend(['Train', 'Test'], loc='upper left')
+    plt.show()
 
     log.close()
 
