@@ -176,10 +176,10 @@ def main():
     print(acc_list)
     
     with open('acc_list.pickle', 'wb') as f:
-    pickle.dump(acc_list, f)
+        pickle.dump(acc_list, f)
     
     with open('loss_list.pickle', 'wb') as f:
-    pickle.dump(loss_list, f)
+        pickle.dump(loss_list, f)
 
     log.close()
 
