@@ -170,7 +170,7 @@ def main():
     history = discriminator.train(dis_dataset, 1, (generated_num // BATCH_SIZE) * 2)
     # Plot training & validation accuracy values
     plt.plot(history.history['accuracy'])
-    plt.plot(history.history['val_accuracy'])
+#     plt.plot(history.history['val_accuracy'])
     plt.title('Model accuracy')
     plt.ylabel('Accuracy')
     plt.xlabel('Epoch')
@@ -179,7 +179,7 @@ def main():
 
     # Plot training & validation loss values
     plt.plot(history.history['loss'])
-    plt.plot(history.history['val_loss'])
+#     plt.plot(history.history['val_loss'])
     plt.title('Model loss')
     plt.ylabel('Loss')
     plt.xlabel('Epoch')
