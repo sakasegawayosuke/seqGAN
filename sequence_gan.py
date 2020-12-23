@@ -14,7 +14,7 @@ from rollout import ROLLOUT
 from target_lstm import TARGET_LSTM
 import pickle
 
-import matplotlib.pyplot as plt # 損失関数のグラフの可視化
+import pickle # 損失関数のグラフの可視化
 
 
 #########################################################################################
@@ -172,28 +172,14 @@ def main():
     
     generator.generate_samples(generated_num // BATCH_SIZE, output_file)
     
-    # 損失関数のグラフの可視化
-    
-    # Plot training & validation accuracy values
-    x = np.arange(0, TOTAL_BATCH, 1)
-    plt.plot(x,acc_list)
-#     plt.plot(history.history['val_accuracy'])
-    plt.title('Model accuracy')
-#     plt.figure(figsize=(20, 20))
-    plt.ylabel('Accuracy')
-    plt.xlabel('Epoch')
-    plt.show()
-
-    # Plot training & validation loss values
-    plt.plot(x,loss_list)
-#     plt.plot(history.history['val_loss'])
-    plt.title('Model loss')
-#     plt.figure(figsize=(20, 20))
-    plt.ylabel('Loss')
-    plt.xlabel('Epoch')
-    plt.show()
     
     print(acc_list)
+    
+    with open('acc_list.pickle', 'wb') as f:
+    pickle.dump(acc_list, f)
+    
+    with open('loss_list.pickle', 'wb') as f:
+    pickle.dump(loss_list, f)
 
     log.close()
 
