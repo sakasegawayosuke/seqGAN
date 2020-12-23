@@ -14,7 +14,7 @@ from rollout import ROLLOUT
 from target_lstm import TARGET_LSTM
 import pickle
 
-import matplotlib.pyplot as plt # 損失関数のグラフの可視化
+import matplotlib as plt # 損失関数のグラフの可視化
 
 
 #########################################################################################
