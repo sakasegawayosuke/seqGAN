@@ -169,7 +169,7 @@ def main():
     # 損失関数のグラフの可視化
     history = discriminator.train(dis_dataset, 1, (generated_num // BATCH_SIZE) * 2)
     # Plot training & validation accuracy values
-    plt.plot(history.history['accurcy'])
+    plt.plot(history.history['accuracy'])
     plt.plot(history.history['val_accuracy'])
     plt.title('Model accuracy')
     plt.ylabel('Accuracy')
