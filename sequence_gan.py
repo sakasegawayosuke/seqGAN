@@ -43,7 +43,7 @@ dis_batch_size = 64
 # GANの学習を実行していく
 #########################################################################################
 
-TOTAL_BATCH = 2 # 生成器と識別器の訓練を何セット行うか
+TOTAL_BATCH = 5 # 生成器と識別器の訓練を何セット行うか
 
 # 学習で使用するデータ
 
@@ -178,6 +178,7 @@ def main():
     plt.plot(acc_list)
 #     plt.plot(history.history['val_accuracy'])
     plt.title('Model accuracy')
+    plt.figure(figsize=(20, 20))
     plt.ylabel('Accuracy')
     plt.xlabel('Epoch')
     plt.show()
@@ -186,9 +187,12 @@ def main():
     plt.plot(loss_list)
 #     plt.plot(history.history['val_loss'])
     plt.title('Model loss')
+    plt.figure(figsize=(20, 20))
     plt.ylabel('Loss')
     plt.xlabel('Epoch')
     plt.show()
+    
+    print(acc_list)
 
     log.close()
 
