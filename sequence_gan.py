@@ -24,7 +24,7 @@ EMB_DIM = 32 # embedding dimension
 HIDDEN_DIM = 32 # hidden state dimension of lstm cell
 SEQ_LENGTH = 20 # sequence length
 START_TOKEN = 0
-PRE_EPOCH_NUM = 10 # supervise (maximum likelihood estimation) epochs
+PRE_EPOCH_NUM = 3 # supervise (maximum likelihood estimation) epochs
 SEED = 88
 BATCH_SIZE = 64
 
@@ -134,7 +134,7 @@ def main():
     for total_batch in range(TOTAL_BATCH):
         print("Generator", total_batch)
         # Train the generator for one step
-        for it in range(15):
+        for it in range(5):
             samples = generator.generate_one_batch()
             rewards = rollout.get_reward(samples, 16, discriminator)
             generator.train_step(samples, rewards)
