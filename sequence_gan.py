@@ -175,19 +175,20 @@ def main():
     # 損失関数のグラフの可視化
     
     # Plot training & validation accuracy values
-    plt.plot(acc_list)
+    x = np.arange(0, TOTAL_BATCH, 1)
+    plt.plot(x,acc_list)
 #     plt.plot(history.history['val_accuracy'])
     plt.title('Model accuracy')
-    plt.figure(figsize=(20, 20))
+#     plt.figure(figsize=(20, 20))
     plt.ylabel('Accuracy')
     plt.xlabel('Epoch')
     plt.show()
 
     # Plot training & validation loss values
-    plt.plot(loss_list)
+    plt.plot(x,loss_list)
 #     plt.plot(history.history['val_loss'])
     plt.title('Model loss')
-    plt.figure(figsize=(20, 20))
+#     plt.figure(figsize=(20, 20))
     plt.ylabel('Loss')
     plt.xlabel('Epoch')
     plt.show()
