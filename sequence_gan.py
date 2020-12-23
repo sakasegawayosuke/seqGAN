@@ -62,6 +62,10 @@ output_file = 'save/output_file.txt'
 # 生成された数
 generated_num = 7000
 
+# accとlossのグラフ描画のための配列
+acc_list = []
+loss_list = []
+
 def main():
     random.seed(SEED)
     np.random.seed(SEED)
@@ -156,7 +160,9 @@ def main():
         for _ in range(1):
             generator.generate_samples(generated_num // BATCH_SIZE, negative_file)
             dis_dataset = dataset_for_discriminator(positive_file, negative_file, BATCH_SIZE)
-            discriminator.train(dis_dataset, 1, (generated_num // BATCH_SIZE) * 2)
+            history = discriminator.train(dis_dataset, 1, (generated_num // BATCH_SIZE) * 2)
+            acc_list.append(history.history['accuracy'])
+            loss_list .append(history.history['loss'])
             
 #         if total_batch % 100 == 0:
 #             generator.generate_samples(generated_num // BATCH_SIZE, 'save/output_file_{}.txt'.format(total_batch))
@@ -167,25 +173,21 @@ def main():
     generator.generate_samples(generated_num // BATCH_SIZE, output_file)
     
     # 損失関数のグラフの可視化
-    history = discriminator.train(dis_dataset, 1, (generated_num // BATCH_SIZE) * 2)
     
     # Plot training & validation accuracy values
-    plt.plot(history.history['accuracy'])
-    print(history.history['accuracy'])
+    plt.plot(acc_list)
 #     plt.plot(history.history['val_accuracy'])
     plt.title('Model accuracy')
     plt.ylabel('Accuracy')
     plt.xlabel('Epoch')
-    plt.legend(['Train', 'Test'], loc='upper left')
     plt.show()
 
     # Plot training & validation loss values
-    plt.plot(history.history['loss'])
+    plt.plot(loss_list)
 #     plt.plot(history.history['val_loss'])
     plt.title('Model loss')
     plt.ylabel('Loss')
     plt.xlabel('Epoch')
-    plt.legend(['Train', 'Test'], loc='upper left')
     plt.show()
 
     log.close()
