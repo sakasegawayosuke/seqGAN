@@ -14,8 +14,6 @@ from rollout import ROLLOUT
 from target_lstm import TARGET_LSTM
 import pickle
 
-import pickle # 損失関数のグラフの可視化
-
 
 #########################################################################################
 #  生成器のパラメータ
