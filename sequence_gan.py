@@ -21,7 +21,7 @@ EMB_DIM = 32 # embedding dimension
 HIDDEN_DIM = 32 # hidden state dimension of lstm cell
 SEQ_LENGTH = 20 # sequence length
 START_TOKEN = 0
-PRE_EPOCH_NUM = 180 # supervise (maximum likelihood estimation) epochs
+PRE_EPOCH_NUM = 300 # supervise (maximum likelihood estimation) epochs
 SEED = 88
 BATCH_SIZE = 64
 
@@ -40,7 +40,7 @@ dis_batch_size = 64
 # GANの学習を実行していく
 #########################################################################################
 
-TOTAL_BATCH = 200 # 生成器と識別器の訓練を何セット行うか
+TOTAL_BATCH = 2000 # 生成器と識別器の訓練を何セット行うか
 
 # 学習で使用するデータ
 
@@ -153,15 +153,25 @@ def main():
         for _ in range(1):
             generator.generate_samples(generated_num // BATCH_SIZE, negative_file)
             dis_dataset = dataset_for_discriminator(positive_file, negative_file, BATCH_SIZE)
-            discriminator.train(dis_dataset, 1, (generated_num // BATCH_SIZE) * 2)
+            history = discriminator.train(dis_dataset, 1, (generated_num // BATCH_SIZE) * 2)
+            acc_list.append(history.history['accuracy'])
+            loss_list .append(history.history['loss'])
             
-#         if total_batch % 100 == 0:
-#             generator.generate_samples(generated_num // BATCH_SIZE, 'save/output_file_{}.txt'.format(total_batch))
+        if total_batch % 100 == 0:
+            generator.generate_samples(generated_num // BATCH_SIZE, 'save/output_file_{}.txt'.format(total_batch))
             
-    generator.save("generator.h5")
-    discriminator.save("discriminator.h5")
+    generator.save("save/generator.h5")
+    discriminator.save("save/discriminator.h5")
     
     generator.generate_samples(generated_num // BATCH_SIZE, output_file)
+    
+    print(acc_list)
+    
+    with open('save/acc_list.pickle', 'wb') as f:
+        pickle.dump(acc_list, f)
+    
+    with open('save/loss_list.pickle', 'wb') as f:
+        pickle.dump(loss_list, f)
 
     log.close()
 
