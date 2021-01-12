@@ -22,7 +22,7 @@ EMB_DIM = 32 # embedding dimension
 HIDDEN_DIM = 32 # hidden state dimension of lstm cell
 SEQ_LENGTH = 20 # sequence length
 START_TOKEN = 0
-PRE_EPOCH_NUM = 180 # supervise (maximum likelihood estimation) epochs
+PRE_EPOCH_NUM = 1 # supervise (maximum likelihood estimation) epochs
 SEED = 88
 BATCH_SIZE = 64
 
@@ -41,7 +41,7 @@ dis_batch_size = 64
 # GANの学習を実行していく
 #########################################################################################
 
-TOTAL_BATCH = 200 # 生成器と識別器の訓練を何セット行うか
+TOTAL_BATCH = 1 # 生成器と識別器の訓練を何セット行うか
 
 # 学習で使用するデータ
 
@@ -110,7 +110,7 @@ def main():
         print('Start pre-training discriminator...')
         # Train 3 epoch on the generated data and do this for 50 times
         # 3エポックの識別器の訓練を５０回繰り返す
-        for _ in range(5):
+        for _ in range(1):
             print("Dataset", _)
 
             # まず生成器が偽物を作成
@@ -120,7 +120,7 @@ def main():
             dis_dataset = dataset_for_discriminator(positive_file, negative_file, BATCH_SIZE)
 
             # 識別器を学習させる
-            discriminator.train(dis_dataset, 3, (generated_num // BATCH_SIZE) * 2)
+            discriminator.train(dis_dataset, 1, (generated_num // BATCH_SIZE) * 2)
         discriminator.save("discriminator_pretrained.h5")
     else:
         discriminator.load("discriminator_pretrained.h5")
@@ -136,9 +136,11 @@ def main():
     for total_batch in range(TOTAL_BATCH):
         print("Generator", total_batch)
         # Train the generator for one step
-        for it in range(15):
+        for it in range(1):
             samples = generator.generate_one_batch()
+            print(samples)
             rewards = rollout.get_reward(samples, 16, discriminator)
+            print(rewards)
             generator.train_step(samples, rewards)
 
         # Test
