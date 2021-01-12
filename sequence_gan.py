@@ -139,8 +139,14 @@ def main():
         for it in range(1):
             samples = generator.generate_one_batch()
             print(samples)
+            print("\n")
+            print(len(samples))
+            print("\n")
             rewards = rollout.get_reward(samples, 16, discriminator)
             print(rewards)
+            print("\n")
+            print(len(rewards))
+            print("\n")
             generator.train_step(samples, rewards)
 
         # Test
